@@ -4,6 +4,7 @@ import SectionHeader from "../Components/SectionHeader";
 import heroImg from "../assets/menu/banner3.jpg";
 import CategoryFoodContener from "./CategoryFoodContener";
 import useDataFetch from "../hook/DataFetch";
+import MenuSectionHeader from "./MenuSectionHeader";
 
 const Menu = () => {
   const [allMenu, setAllMenu] = useState([]);
@@ -14,6 +15,7 @@ const Menu = () => {
       <PageHeader bg={heroImg} title={"OUR MENU"} />
       <SectionHeader headerName={"Don't miss"} title={"TODAY'S OFFER"} />
       <CategoryFoodContener items={offeredMenu} />
+      <MenuSectionHeader title={"DESSERTS"} />
     </div>
   );
 };
