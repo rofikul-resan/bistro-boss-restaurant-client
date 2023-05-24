@@ -2,6 +2,8 @@ import Banner from "./Banner";
 import ChefRecommends from "./ChefRecommends/ChefRecommends";
 import Gallary from "./Gallary";
 import Menu from "./MenuSection/Menu";
+import MenuBanner from "./MenuSection/MenuBanner";
+import Testimonials from "./Testimonaials/Testimonials";
 import "./home.css";
 
 const Home = () => {
@@ -16,6 +18,8 @@ const Home = () => {
         </h1>
       </div>
       <ChefRecommends />
+      <MenuBanner />
+      <Testimonials />
     </div>
   );
 };

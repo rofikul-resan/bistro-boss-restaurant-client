@@ -66,7 +66,7 @@ const Gallary = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-      <div className=" py-28 bg-[url('../../src//assets//home/featured.jpg')] bg-cover mt-14 bg-fixed ">
+      <div className=" py-28 bg-[url('../../src/assets/home/featured.jpg')] bg-cover mt-14 bg-fixed ">
         <div className="text-justify px-24 py-12 w-8/12 mx-auto bg-white ">
           <h1 className="font-cinzel font-semibold text-center text-2xl ">
             Bistro Boss

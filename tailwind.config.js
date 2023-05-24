@@ -12,8 +12,8 @@ export default {
       Raleway: ["Raleway", " sans-serif"],
     },
   },
-  daisyui: {
-    themes: ["light"],
-  },
+  // daisyui: {
+  //   themes: ["light"],
+  // },
   plugins: [require("daisyui")],
 };
