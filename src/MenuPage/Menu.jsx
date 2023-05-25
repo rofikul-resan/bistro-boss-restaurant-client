@@ -18,15 +18,15 @@ const Menu = () => {
     <div>
       <PageHeader bg={heroImg} title={"OUR MENU"} />
       <SectionHeader headerName={"Don't miss"} title={"TODAY'S OFFER"} />
-      <CategoryFoodContener items={offeredMenu} />
+      <CategoryFoodContener items={offeredMenu} title={"offered"} />
       <MenuSectionHeader title={"DESSERTS"} />
-      <CategoryFoodContener items={dessertMenu} />
+      <CategoryFoodContener items={dessertMenu} title={"dessert"} />
       <MenuSectionHeader title={"pizza"} />
-      <CategoryFoodContener items={pizzaMenu} />
+      <CategoryFoodContener items={pizzaMenu} title={"pizza"} />
       <MenuSectionHeader title={"salad"} />
-      <CategoryFoodContener items={saladMenu} />
+      <CategoryFoodContener items={saladMenu} title={"salad"} />
       <MenuSectionHeader title={"soup"} />
-      <CategoryFoodContener items={soupMenu} />
+      <CategoryFoodContener items={soupMenu} title={"soup"} />
     </div>
   );
 };

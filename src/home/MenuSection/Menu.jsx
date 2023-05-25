@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 const Menu = () => {
   const [menus, setMenus] = useState([]);
   useEffect(() => {
-    fetch("/menu.json")
+    fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => setMenus(data));
   }, []);

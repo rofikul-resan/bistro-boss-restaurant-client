@@ -2,3 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-tabs__tab-list {
+  @apply flex justify-center;
+}
+.react-tabs__tab-panel {
+  @apply w-10/12 mx-auto;
+}
+.react-tabs__tab--selected {
+  @apply bg-success    !important;
+}

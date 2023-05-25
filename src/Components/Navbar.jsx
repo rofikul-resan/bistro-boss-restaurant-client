@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
+import ScrollToTop from "./ScrollToTop";
 
 const Navbar = () => {
+  const location = useLocation();
+
   return (
     <nav className="bg-black/70 flex justify-between w-full items-center py-4 text-white  md:px-24  absolute z-10 top-0  ">
+      <ScrollToTop path={location.pathname} />
       <div className="flex-1">
         <div className=" ml-6 md:text-center w-fit">
           <p className="font-cinzel text-xl font-bold">BISTRO BOSS</p>
@@ -26,7 +30,8 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            data-theme="dark"
+            className="menu menu-compact  dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
               <a className="justify-between">
@@ -49,7 +54,7 @@ const Navbar = () => {
 
       {/* nav link  */}
       <div className="ml-auto mr-4">
-        <div className="md:flex  hidden flex-col md:flex-row gap-4 md:ml-auto font-semibold">
+        <div className="md:flex  hidden flex-col md:flex-row gap-4 md:ml-auto font-semibold uppercase">
           <NavLink
             to={"/"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
@@ -79,7 +84,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink
-            to={"/our-shop"}
+            to={"/our-shop/salad"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
           >
             Our Shop
