@@ -6,14 +6,26 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
   const [submit, setSubmit] = useState(false);
   const { register, handleSubmit } = useForm();
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogin = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    login(email, password)
+      .then((res) => {
+        console.log(res.user);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {

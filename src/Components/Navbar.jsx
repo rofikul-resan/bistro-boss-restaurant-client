@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
   const location = useLocation();
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   return (
     <nav className="bg-black/70 flex justify-between w-full items-center py-4 text-white  md:px-24  absolute z-10 top-0  ">
@@ -47,7 +47,15 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a
+                  onClick={() =>
+                    logOut()
+                      .then(() => {})
+                      .catch((err) => console.log(err))
+                  }
+                >
+                  Logout
+                </a>
               </li>
             </ul>
           </div>

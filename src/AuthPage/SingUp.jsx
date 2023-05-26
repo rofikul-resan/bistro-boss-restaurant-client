@@ -1,12 +1,23 @@
 import { useForm } from "react-hook-form";
 import img from "../assets/others/authentication2.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const SingUp = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
+  const { createUser } = useContext(AuthContext);
   const handleSingUp = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    createUser(email, password)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
