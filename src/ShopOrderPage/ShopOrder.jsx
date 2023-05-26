@@ -17,9 +17,7 @@ const ShopOrder = () => {
     "offered",
   ];
   const defaultIndex = tabArr.indexOf(title);
-  console.log(defaultIndex);
   const [tabIndex, setTabIndex] = useState(defaultIndex);
-  console.log(title);
   return (
     <div>
       <PageHeader title={"our Shop"} bg={bgImg} />
