@@ -5,6 +5,7 @@ import Menu from "../MenuPage/Menu";
 import ShopOrder from "../ShopOrderPage/ShopOrder";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../AuthPage/Login";
+import SingUp from "../AuthPage/SingUp";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "sing-up",
+        element: <SingUp />,
       },
     ],
   },
