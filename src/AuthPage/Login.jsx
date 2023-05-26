@@ -7,6 +7,7 @@ import {
 } from "react-simple-captcha";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const [submit, setSubmit] = useState(false);
@@ -32,7 +33,7 @@ const Login = () => {
       <img src={img} alt="" />
       <div className="w-9/12 mx-auto">
         <form onSubmit={handleSubmit(handleLogin)}>
-          <h1 className="text-center font-bold text-3xl my-6">Log In</h1>
+          <h1 className="text-center font-bold text-3xl mt-6">Log In</h1>
           <div className="form-control">
             <label className="label">
               <span className=" text-xl font-semibold ">Email</span>
@@ -82,6 +83,7 @@ const Login = () => {
             Create a New Account
           </Link>
         </p>
+        <SocialLogin />
       </div>
     </div>
   );
