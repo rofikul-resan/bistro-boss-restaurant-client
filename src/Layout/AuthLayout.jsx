@@ -7,9 +7,7 @@ const AuthLayout = () => {
       style={{ background: `url("${authBg}")` }}
       className="flex py-20 min-h-screen"
     >
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };
