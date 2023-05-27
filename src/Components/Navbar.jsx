@@ -67,7 +67,7 @@ const Navbar = () => {
 
       {/* nav link  */}
       <div className="ml-auto mr-4">
-        <div className="md:flex  hidden flex-col md:flex-row gap-4 md:ml-auto font-semibold items-center uppercase">
+        <div className="flex navbar absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row gap-4 md:ml-auto font-semibold items-center uppercase">
           <NavLink
             to={"/"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
