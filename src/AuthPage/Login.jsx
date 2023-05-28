@@ -83,7 +83,7 @@ const Login = () => {
             <button
               type="submit"
               className="btn btn-block btn-success my-6"
-              disabled={!submit}
+              disabled={submit}
             >
               Log In{" "}
             </button>

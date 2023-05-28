@@ -4,7 +4,6 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 const TestimonialsCard = ({ reviews }) => {
   const { name, rating, details } = reviews;
-  console.log(reviews);
   return (
     <div className="mb-16">
       <div className="w-fit mx-auto">

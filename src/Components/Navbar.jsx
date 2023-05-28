@@ -3,13 +3,15 @@ import { HiShoppingCart } from "react-icons/hi";
 import ScrollToTop from "./ScrollToTop";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import useCarts from "../hook/useCarts";
 
 const Navbar = () => {
   const location = useLocation();
   const { user, logOut } = useContext(AuthContext);
-
+  const { carts } = useCarts();
+  console.log(carts);
   return (
-    <nav className="bg-black/70 flex justify-between w-full items-center py-4 text-white  md:px-24  absolute z-10 top-0  ">
+    <nav className="bg-black/70 flex justify-between w-full items-center py-4 text-white  md:px-24  fixed z-10 top-0  ">
       <ScrollToTop path={location.pathname} />
       <div className="flex-1">
         <div className=" ml-6 md:text-center w-fit">
@@ -21,7 +23,7 @@ const Navbar = () => {
         <div className="flex md:order-2 items-center text-2xl gap-4 ">
           <div className="relative">
             <div className="rounded-full absolute -top-1 -right-1 grid place-items-center bg-orange-700 h-4 w-4  text-xs">
-              2
+              {carts.length}
             </div>
             <HiShoppingCart />
           </div>
@@ -39,7 +41,7 @@ const Navbar = () => {
             >
               <li>
                 <a className="justify-between">
-                  Profile
+                  {user?.displayName}
                   <span className="badge">New</span>
                 </a>
               </li>
@@ -67,7 +69,7 @@ const Navbar = () => {
 
       {/* nav link  */}
       <div className="ml-auto mr-4">
-        <div className="flex navbar absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row gap-4 md:ml-auto font-semibold items-center uppercase">
+        <div className="flex navbar absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row md:ml-auto font-semibold items-center uppercase">
           <NavLink
             to={"/"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
@@ -88,13 +90,13 @@ const Navbar = () => {
           >
             Our Menu
           </NavLink>
-
+          {/* 
           <NavLink
-            to={"/our-shop/salad"}
+            to={"/our-shop"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
           >
             Our Shop
-          </NavLink>
+          </NavLink> */}
 
           {user ? (
             <NavLink
