@@ -16,3 +16,7 @@
 .navbar a {
   @apply hover:bg-purple-500 md:hover:bg-transparent py-3 md:py-2 w-11/12 md:w-fit px-4 md:px-2 mx-2 md:mx-0 rounded-md;
 }
+
+.menu a {
+  @apply py-1;
+}
