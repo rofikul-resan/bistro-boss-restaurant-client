@@ -6,6 +6,9 @@ import ShopOrder from "../ShopOrderPage/ShopOrder";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../AuthPage/Login";
 import SingUp from "../AuthPage/SingUp";
+import DashBoardLayout from "../Layout/DashBoardLayout";
+import HomeDb from "../Dashboard/Page/home/HomeDb";
+import CartsDb from "../Dashboard/Page/ManageCarts/CartsDb";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +26,20 @@ const router = createBrowserRouter([
       {
         path: "/our-shop/:title",
         element: <ShopOrder />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashBoardLayout />,
+    children: [
+      {
+        path: "home",
+        element: <HomeDb />,
+      },
+      {
+        path: "carts",
+        element: <CartsDb />,
       },
     ],
   },

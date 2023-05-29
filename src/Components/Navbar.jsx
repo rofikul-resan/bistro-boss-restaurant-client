@@ -1,15 +1,16 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
 import ScrollToTop from "./ScrollToTop";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useCarts from "../hook/useCarts";
+import { Divide as Hamburger } from "hamburger-react";
 
 const Navbar = () => {
   const location = useLocation();
   const { user, logOut } = useContext(AuthContext);
   const { carts } = useCarts();
-  console.log(carts);
+  const [isOpen, setOpen] = useState(false);
   return (
     <nav className="bg-black/70 flex justify-between w-full items-center py-4 text-white  md:px-24  fixed z-10 top-0  ">
       <ScrollToTop path={location.pathname} />
@@ -21,12 +22,12 @@ const Navbar = () => {
       </div>
       {user && (
         <div className="flex md:order-2 items-center text-2xl gap-4 ">
-          <div className="relative">
+          <Link to={"/dashboard/carts"} className="relative">
             <div className="rounded-full absolute -top-1 -right-1 grid place-items-center bg-orange-700 h-4 w-4  text-xs">
               {carts.length}
             </div>
             <HiShoppingCart />
-          </div>
+          </Link>
           {/* user info  */}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -64,12 +65,19 @@ const Navbar = () => {
           <div className="text-white hover:text-black" />
 
           {/* nav toggler */}
+          <div className="md:hidden">
+            <Hamburger toggled={isOpen} toggle={setOpen} />
+          </div>
         </div>
       )}
 
       {/* nav link  */}
       <div className="ml-auto mr-4">
-        <div className="flex navbar absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row md:ml-auto font-semibold items-center uppercase">
+        <div
+          className={`flex navbar delay-300 absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row md:ml-auto font-semibold items-center uppercase ${
+            !isOpen ? "opacity-0 md:opacity-100" : "opacity-100"
+          }`}
+        >
           <NavLink
             to={"/"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
@@ -100,7 +108,7 @@ const Navbar = () => {
 
           {user ? (
             <NavLink
-              to={"/Dashboard"}
+              to={"/dashboard/home"}
               className={({ isActive }) => (isActive ? "text-orange-500" : "")}
             >
               DASHBOARD
