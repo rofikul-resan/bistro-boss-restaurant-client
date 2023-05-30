@@ -4,17 +4,33 @@ import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const SingUp = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
+
   const handleSingUp = (data) => {
     const { email, password, name, photo } = data;
     createUser(email, password)
       .then(() => {
-        updateUser(name, photo);
         navigate("/");
+        updateUser(name, photo)
+          .then(() => {
+            console.log(name, email);
+            axios
+              .post("http://localhost:5000/users", {
+                name,
+                email,
+              })
+              .then((data) => {
+                console.log(data.data);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);

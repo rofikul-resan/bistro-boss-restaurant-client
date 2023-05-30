@@ -1,6 +1,30 @@
+import { useContext } from "react";
 import { BsFacebook, BsGithub, BsGoogle } from "react-icons/bs";
+import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
+  const { googleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((res) => {
+        const user = res.user;
+        navigate("/");
+        axios
+          .post("http://localhost:5000/users", {
+            name: user.displayName,
+            email: user.email,
+          })
+          .then((data) => {
+            console.log(data.data);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className=" my-8">
       <p className="text-center font-semibold">Or sign in with</p>
@@ -9,7 +33,10 @@ const SocialLogin = () => {
           {" "}
           <BsFacebook className="text-xl m-3" />{" "}
         </button>
-        <button className="border-2 rounded-full border-gray-700">
+        <button
+          onClick={handleGoogleLogin}
+          className="border-2 rounded-full border-gray-700"
+        >
           {" "}
           <BsGoogle className="text-xl m-3" />{" "}
         </button>

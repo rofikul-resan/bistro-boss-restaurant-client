@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -27,8 +29,13 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const googleLogin = () => {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+
   const updateUser = (name, image) => {
-    updateProfile(auth.currentUser, {
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: image,
     });
@@ -40,13 +47,15 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       if (currentUser) {
         axios
-          .post("http://localhost:5000/users", {
-            name: currentUser.displayName,
+          .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {
-            console.log(data.data);
+            console.log(data.data.token);
+            localStorage.setItem("token", JSON.stringify(data.data.token));
           });
+      } else {
+        localStorage.removeItem("token");
       }
     });
     return () => userUpdater();
@@ -59,6 +68,7 @@ const AuthProvider = ({ children }) => {
     login,
     logOut,
     updateUser,
+    googleLogin,
   };
   return (
     <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>

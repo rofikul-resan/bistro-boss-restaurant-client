@@ -9,6 +9,8 @@ import SingUp from "../AuthPage/SingUp";
 import DashBoardLayout from "../Layout/DashBoardLayout";
 import HomeDb from "../Dashboard/Page/home/HomeDb";
 import CartsDb from "../Dashboard/Page/ManageCarts/CartsDb";
+import AllUsersAdmin from "../Dashboard/Admin/AllUsersAdmin";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +33,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoardLayout />,
+    element: (
+      <PrivetRoute>
+        <DashBoardLayout />
+      </PrivetRoute>
+    ),
     children: [
+      {
+        path: "all-users",
+        element: <AllUsersAdmin />,
+      },
       {
         path: "home",
         element: <HomeDb />,
@@ -43,6 +53,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/auth",
     element: <AuthLayout />,
