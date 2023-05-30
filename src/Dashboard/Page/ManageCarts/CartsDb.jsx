@@ -57,7 +57,7 @@ const CartsDb = () => {
                     </div>
                   </td>
                   <td className="font-semibold">{food.name}</td>
-                  <td className="text-end w-20">{+food.price.toFixed(2)}</td>
+                  <td className="text-end w-20">$ {+food.price.toFixed(2)}</td>
                   <th>
                     <button
                       onClick={() => handleDelete(food._id)}

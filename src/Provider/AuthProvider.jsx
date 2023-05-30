@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem("token", JSON.stringify(data.data.token));
           });
       } else {
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
       }
     });
     return () => userUpdater();
