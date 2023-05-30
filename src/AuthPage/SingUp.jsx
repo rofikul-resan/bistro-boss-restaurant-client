@@ -8,11 +8,12 @@ import { AuthContext } from "../Provider/AuthProvider";
 const SingUp = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const handleSingUp = (data) => {
-    const { email, password } = data;
+    const { email, password, name, photo } = data;
     createUser(email, password)
       .then(() => {
+        updateUser(name, photo);
         navigate("/");
       })
       .catch((err) => {
@@ -38,6 +39,17 @@ const SingUp = () => {
               placeholder="Your Name"
               className="input input-bordered"
               {...register("name")}
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className=" text-xl font-semibold ">Photo</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Your photo Url"
+              className="input input-bordered"
+              {...register("photo")}
             />
           </div>
           <div className="form-control">

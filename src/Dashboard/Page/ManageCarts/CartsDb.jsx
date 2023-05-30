@@ -24,7 +24,7 @@ const CartsDb = () => {
       <div className="px-8 bg-white rounded-md py-3">
         <div className="text-2xl font-bold flex justify-between px-3 mb-4">
           <p>Total orders: {carts.length}</p>
-          <p>total price: ${totalPrice}</p>
+          <p>total price: ${totalPrice.toFixed(2)}</p>
           <button className="btn btn-success btn-sm">pay</button>
         </div>
         <div className="overflow-x-auto w-full">
@@ -57,7 +57,7 @@ const CartsDb = () => {
                     </div>
                   </td>
                   <td className="font-semibold">{food.name}</td>
-                  <td className="text-end">{food.price}</td>
+                  <td className="text-end w-20">{+food.price.toFixed(2)}</td>
                   <th>
                     <button
                       onClick={() => handleDelete(food._id)}

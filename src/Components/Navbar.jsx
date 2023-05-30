@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user?.photoUrl} />
+                <img src={user?.photoURL} />
               </div>
             </label>
             <ul
@@ -98,13 +98,13 @@ const Navbar = () => {
           >
             Our Menu
           </NavLink>
-          {/* 
+
           <NavLink
-            to={"/our-shop"}
+            to={"/our-shop/salad"}
             className={({ isActive }) => (isActive ? "text-orange-500" : "")}
           >
             Our Shop
-          </NavLink> */}
+          </NavLink>
 
           {user ? (
             <NavLink

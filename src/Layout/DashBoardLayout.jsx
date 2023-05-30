@@ -2,10 +2,13 @@ import { NavLink, Outlet } from "react-router-dom";
 import { Divide as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import { AiFillHome, AiOutlineComment, AiOutlineMail } from "react-icons/ai";
+import { ImSpoonKnife } from "react-icons/im";
+import { FaBook, FaUsers } from "react-icons/fa";
 import {
   BsBook,
   BsCalendar,
   BsCart2,
+  BsFillMenuButtonWideFill,
   BsMenuAppFill,
   BsShop,
   BsWallet,
@@ -16,6 +19,8 @@ import useCarts from "../hook/useCarts";
 const DashBoardLayout = () => {
   const [isOpen, setOpen] = useState(false);
   const { carts } = useCarts();
+  // todo chenge rool
+  const roll = true;
   return (
     <div>
       {/* side bar  */}
@@ -48,73 +53,129 @@ const DashBoardLayout = () => {
               <p className="tracking-[4px]">Restaurant</p>
             </div>
 
-            <li className="font-semibold text-lg">
-              <NavLink
-                className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"./home"}
-              >
-                <AiFillHome />
-                User Home
-              </NavLink>
-            </li>
+            {roll ? (
+              <>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"./admin-home"}
+                  >
+                    <AiFillHome />
+                    Admin Home
+                  </NavLink>
+                </li>
 
-            <li className="font-semibold text-lg">
-              <NavLink
-                className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"/dashboard/reservation"}
-              >
-                <BsCalendar />
-                reservation
-              </NavLink>
-            </li>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/add-items"}
+                  >
+                    <ImSpoonKnife />
+                    add items
+                  </NavLink>
+                </li>
 
-            <li className="font-semibold text-lg">
-              <NavLink
-                className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"/dashboard/payment-history"}
-              >
-                <BsWallet />
-                payment history
-              </NavLink>
-            </li>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/manage-items"}
+                  >
+                    <BsFillMenuButtonWideFill />
+                    manage items
+                  </NavLink>
+                </li>
 
-            <li className="font-semibold text-lg">
-              <NavLink
-                className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"/dashboard/carts"}
-              >
-                <BsCart2 />
-                my cart{" "}
-                <span className="badge badge-primary">{carts.length}</span>
-              </NavLink>
-            </li>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/manage-bookings"}
+                  >
+                    <FaBook />
+                    Manage bookings
+                  </NavLink>
+                </li>
 
-            <li className="font-semibold text-lg">
-              <NavLink
-                className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"/dashboard/add-review"}
-              >
-                <AiOutlineComment />
-                add review
-              </NavLink>
-            </li>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/all-users"}
+                  >
+                    <FaUsers />
+                    all users
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"./home"}
+                  >
+                    <AiFillHome />
+                    User Home
+                  </NavLink>
+                </li>
 
-            <li className="font-semibold text-lg">
-              <NavLink
-                className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"/dashboard/my-booking"}
-              >
-                <BsBook />
-                my booking
-              </NavLink>
-            </li>
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/reservation"}
+                  >
+                    <BsCalendar />
+                    reservation
+                  </NavLink>
+                </li>
+
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/payment-history"}
+                  >
+                    <BsWallet />
+                    payment history
+                  </NavLink>
+                </li>
+
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/carts"}
+                  >
+                    <BsCart2 />
+                    my cart{" "}
+                    <span className="badge badge-primary">{carts.length}</span>
+                  </NavLink>
+                </li>
+
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/add-review"}
+                  >
+                    <AiOutlineComment />
+                    add review
+                  </NavLink>
+                </li>
+
+                <li className="font-semibold text-lg">
+                  <NavLink
+                    className={({ isActive }) => (isActive ? "text-white" : "")}
+                    to={"/dashboard/my-booking"}
+                  >
+                    <BsBook />
+                    my booking
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             <div className="w-full border-b border-white my-3"></div>
 
             <li className="font-semibold text-lg">
               <NavLink
                 className={({ isActive }) => (isActive ? "text-white" : "")}
-                to={"./"}
+                to={"/"}
               >
                 <HiHome />
                 Home
