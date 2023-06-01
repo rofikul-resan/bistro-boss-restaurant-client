@@ -15,12 +15,21 @@ import {
 } from "react-icons/bs";
 import { HiHome } from "react-icons/hi";
 import useCarts from "../hook/useCarts";
+import useAdmin from "../hook/useAdmin";
+import { useEffect } from "react";
 
 const DashBoardLayout = () => {
   const [isOpen, setOpen] = useState(false);
+  const [roll, setRoll] = useState("");
   const { carts } = useCarts();
-  // todo chenge rool
-  const roll = true;
+  // todo change roll
+  const { AdminUser, isLoading } = useAdmin();
+  useEffect(() => {
+    if (!isLoading) {
+      console.log(AdminUser);
+      setRoll(AdminUser.roll);
+    }
+  }, [isLoading, AdminUser]);
   return (
     <div>
       {/* side bar  */}
@@ -53,7 +62,7 @@ const DashBoardLayout = () => {
               <p className="tracking-[4px]">Restaurant</p>
             </div>
 
-            {roll ? (
+            {roll === "admin" ? (
               <>
                 <li className="font-semibold text-lg">
                   <NavLink

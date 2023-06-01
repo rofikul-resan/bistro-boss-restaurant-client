@@ -31,7 +31,6 @@ const TabCard = ({ food }) => {
           if (data.insertedId) {
             refetch();
           }
-          console.log(data);
         });
     } else {
       navigate("/auth/login", { state: location.pathname });

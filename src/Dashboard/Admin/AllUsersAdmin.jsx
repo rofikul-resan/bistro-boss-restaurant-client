@@ -3,15 +3,26 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import SectionHeader from "../../Components/SectionHeader";
 import useAllUser from "../../hook/useAllUser";
 import axios from "axios";
+import useAxiosSecure from "../../hook/useAxiosSecure";
 
 const AllUsersAdmin = () => {
   const { users, refetch } = useAllUser();
+  const { axiosSecure } = useAxiosSecure();
   const handleUserDelete = (id) => {
     axios.delete(`http://localhost:5000/users/${id}`).then((data) => {
       if (data.data.deletedCount > 0) {
         refetch();
       }
     });
+  };
+
+  const handleAdmin = async (id) => {
+    const res = await axiosSecure.patch(`/users/admin/${id}`);
+    if (res.data.modifiedCount > 0) {
+      refetch();
+    } else {
+      alert("only admin can update");
+    }
   };
   return (
     <div>
@@ -40,10 +51,13 @@ const AllUsersAdmin = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                    {user.roll ? (
+                    {user.roll === "admin" ? (
                       <span>Admin</span>
                     ) : (
-                      <button className="btn btn-success text-xl">
+                      <button
+                        onClick={() => handleAdmin(user._id)}
+                        className="btn btn-success text-xl"
+                      >
                         {" "}
                         <MdAdminPanelSettings />
                       </button>

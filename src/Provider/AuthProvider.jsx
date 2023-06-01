@@ -17,12 +17,15 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [firstLoading, setFirstLoading] = useState(true);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
@@ -30,6 +33,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const googleLogin = () => {
+    setLoading(true);
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider);
   };
@@ -44,18 +48,18 @@ const AuthProvider = ({ children }) => {
     const userUpdater = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
-      setLoading(false);
+      setFirstLoading(false);
       if (currentUser) {
         axios
           .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {
-            console.log(data.data.token);
             localStorage.setItem("token", JSON.stringify(data.data.token));
+            setLoading(false);
           });
       } else {
-        // localStorage.removeItem("token");
+        localStorage.removeItem("token");
       }
     });
     return () => userUpdater();
@@ -64,6 +68,7 @@ const AuthProvider = ({ children }) => {
   const authValue = {
     user,
     loading,
+    firstLoading,
     createUser,
     login,
     logOut,
