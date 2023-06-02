@@ -12,7 +12,7 @@ const AddItem = () => {
     formData.append("image", image[0]);
     const postUrl = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_UPLOAD_TOKEN
-    }&expiration=600`;
+    }`;
     console.log(postUrl);
     fetch(postUrl, {
       method: "POST",
