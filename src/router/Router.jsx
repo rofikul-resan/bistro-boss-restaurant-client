@@ -11,6 +11,7 @@ import HomeDb from "../Dashboard/Page/home/HomeDb";
 import CartsDb from "../Dashboard/Page/ManageCarts/CartsDb";
 import AllUsersAdmin from "../Dashboard/Admin/AllUsersAdmin";
 import PrivetRoute from "./PrivetRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "all-users",
-        element: <AllUsersAdmin />,
+        element: (
+          <AdminRoute>
+            <AllUsersAdmin />
+          </AdminRoute>
+        ),
       },
       {
         path: "home",

@@ -8,7 +8,7 @@ const useAdmin = () => {
   const {
     refetch,
     isLoading,
-    data: AdminUser,
+    data: adminUser = {},
   } = useQuery({
     queryKey: ["isAdmin", user?.email],
     enabled: !loading,
@@ -17,7 +17,7 @@ const useAdmin = () => {
       return res.data;
     },
   });
-  return { AdminUser, refetch, isLoading };
+  return { adminUser, refetch, isLoading };
 };
 
 export default useAdmin;

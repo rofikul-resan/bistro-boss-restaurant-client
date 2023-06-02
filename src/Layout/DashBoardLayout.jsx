@@ -23,13 +23,13 @@ const DashBoardLayout = () => {
   const [roll, setRoll] = useState("");
   const { carts } = useCarts();
   // todo change roll
-  const { AdminUser, isLoading } = useAdmin();
+  const { adminUser, isLoading } = useAdmin();
   useEffect(() => {
     if (!isLoading) {
-      console.log(AdminUser);
-      setRoll(AdminUser.roll);
+      console.log(adminUser);
+      setRoll(adminUser.roll);
     }
-  }, [isLoading, AdminUser]);
+  }, [isLoading, adminUser]);
   return (
     <div>
       {/* side bar  */}
