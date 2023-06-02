@@ -12,6 +12,7 @@ import CartsDb from "../Dashboard/Page/ManageCarts/CartsDb";
 import AllUsersAdmin from "../Dashboard/Admin/AllUsersAdmin";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
+import AddItem from "../Dashboard/Admin/AddItem";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllUsersAdmin />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-items",
+        element: (
+          <AdminRoute>
+            <AddItem />
           </AdminRoute>
         ),
       },
