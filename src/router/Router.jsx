@@ -14,6 +14,7 @@ import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
 import AddItem from "../Dashboard/Admin/AddItem";
 import ManageItem from "../Dashboard/Admin/ManageItem";
+import Payment from "../Components/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -66,9 +67,14 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      // admin route end
       {
         path: "home",
         element: <HomeDb />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
       {
         path: "carts",

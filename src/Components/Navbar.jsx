@@ -74,8 +74,8 @@ const Navbar = () => {
       {/* nav link  */}
       <div className="ml-auto mr-4">
         <div
-          className={`flex navbar delay-300 absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row md:ml-auto font-semibold items-center uppercase ${
-            !isOpen ? "opacity-0 md:opacity-100" : "opacity-100"
+          className={`md:flex navbar delay-300 absolute md:static bg-black/70 md:bg-transparent  w-full md:w-fit left-0 top-[5.25rem] flex-col md:flex-row md:ml-auto font-semibold items-center uppercase ${
+            !isOpen ? "opacity-0 hidden md:opacity-100" : "opacity-100"
           }`}
         >
           <NavLink

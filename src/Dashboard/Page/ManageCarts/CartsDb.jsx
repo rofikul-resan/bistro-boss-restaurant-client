@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionHeader from "../../../Components/SectionHeader";
 import useCarts from "../../../hook/useCarts";
 import { BsTrash } from "react-icons/bs";
@@ -5,7 +6,6 @@ import { BsTrash } from "react-icons/bs";
 const CartsDb = () => {
   const { carts, refetch } = useCarts();
   const totalPrice = carts.reduce((a, b) => a + b.price, 0);
-  console.log(carts);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/carts/${id}`, {
@@ -25,7 +25,9 @@ const CartsDb = () => {
         <div className="text-2xl font-bold flex justify-between px-3 mb-4">
           <p>Total orders: {carts.length}</p>
           <p>total price: ${totalPrice.toFixed(2)}</p>
-          <button className="btn btn-success btn-sm">pay</button>
+          <Link to={"/dashboard/payment"} className="btn btn-success btn-sm">
+            pay
+          </Link>
         </div>
         <div className="overflow-x-auto w-full">
           <table className="table w-full ">
