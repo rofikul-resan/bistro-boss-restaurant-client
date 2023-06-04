@@ -15,10 +15,11 @@ const CheckOut = ({ price, carts }) => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      console.log(" cil", res.data.clientSecret);
-      setClientSecret(res.data.clientSecret);
-    });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
@@ -66,15 +67,17 @@ const CheckOut = ({ price, carts }) => {
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
       const paymentHistory = {
-        name: user.displayName,
+        userName: user.displayName,
         email: user.email,
         amount: price,
+        status: "service pending",
+        quantity: carts.length,
         orderItemNames: carts.map((food) => food.name),
         orderItemId: carts.map((food) => food._id),
       };
       axiosSecure.post("/payments", paymentHistory).then((res) => {
         console.log(res.data);
-        if (res.data.insertedId) {
+        if (res.data.insertResult.insertedId) {
           alert("payments successfully");
         }
       });
@@ -82,6 +85,9 @@ const CheckOut = ({ price, carts }) => {
   };
   return (
     <div>
+      <h1 className="text-3xl font-semibold text-center mb-4">
+        Total Order : {carts.length}{" "}
+      </h1>
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
