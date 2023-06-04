@@ -3,13 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
 
-const CheckOut = ({ price }) => {
+const CheckOut = ({ price, carts }) => {
   console.log(price);
   const [cardError, setCardError] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
   const { axiosSecure } = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
+  const [process, setProcess] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -17,10 +19,11 @@ const CheckOut = ({ price }) => {
       console.log(" cil", res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
-  }, []);
+  }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setProcess(true);
     if (!stripe || !elements) {
       return;
     }
@@ -53,13 +56,29 @@ const CheckOut = ({ price }) => {
           },
         },
       });
-
+    setProcess(false);
     if (confirmError) {
       console.log(confirmError);
       return setCardError(confirmError);
     }
-
     console.log(paymentIntent);
+
+    if (paymentIntent.status === "succeeded") {
+      setTransactionId(paymentIntent.id);
+      const paymentHistory = {
+        name: user.displayName,
+        email: user.email,
+        amount: price,
+        orderItemNames: carts.map((food) => food.name),
+        orderItemId: carts.map((food) => food._id),
+      };
+      axiosSecure.post("/payments", paymentHistory).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          alert("payments successfully");
+        }
+      });
+    }
   };
   return (
     <div>
@@ -83,14 +102,19 @@ const CheckOut = ({ price }) => {
         <button
           type="submit"
           className="btn btn-success mt-4"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || process}
         >
           Pay
         </button>
       </form>
       {cardError && (
-        <p className="text-2xl text-center font-semibold text-red-600">
+        <p className="text-2xl text-center font-semibold text-red-600 mt-3">
           {cardError}
+        </p>
+      )}
+      {transactionId && (
+        <p className="text-2xl text-center font-semibold text-orange-600 mt-3">
+          Transaction from {transactionId}
         </p>
       )}
     </div>
